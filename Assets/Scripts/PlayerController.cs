@@ -6,12 +6,38 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    public float moveSpeed = 5f;
-    public Transform mainCamera;
     private Vector2 movement;
+    public float moveSpeed = 5f;
 
     private bool passStart;
-    private bool canMove = true;
+    public bool canMove = true;
+    public bool isReading = false;
+
+    public GameObject memoryPanel;
+    public Color color;
+    public string text;
+
+
+
+    public Transform mainCamera;
+
+    public static PlayerController instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+        memoryPanel.SetActive(false);
+        
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     void Start()
     {
@@ -30,6 +56,11 @@ public class PlayerController : MonoBehaviour
         if (passStart)
         {
             mainCamera.position = new Vector3(mainCamera.position.x, rb2d.position.y, mainCamera.position.z);
+        }
+
+        if (Input.GetButtonDown("Jump") && isReading)
+        {
+            CloseMemory();
         }
     }
 
@@ -50,8 +81,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Сработал триггер");
-        Destroy(other.gameObject);
-        canMove = false;
+        if (other.gameObject.TryGetComponent<Memory>(out Memory memory))
+        {
+            SetNewMemory(other.gameObject);
+        }
+    }
+
+    private void SetNewMemory(GameObject memory)
+    {
+        color = memory.GetComponent<Memory>().data.color;
+        text = memory.GetComponent<Memory>().data.text;
+
+        memoryPanel.SetActive(true);
+        Destroy(memory);
+        
+        memoryPanel.GetComponent<Animation>().Play("Anim_MemoryStart");
+    }
+
+    private void CloseMemory()
+    {
+        memoryPanel.GetComponent<Animation>().Play("Anim_MemoryEnd");
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46bc42da768e764d9f8a6ecdb6c1eb6, type: 3}
   m_Name: Memory 1
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
-  text: 
+  color: {r: 1, g: 0, b: 0, a: 1}
+  text: "\u041A\u0430\u043A\u043E\u0439-\u0442\u043E \u0442\u0435\u043A\u0441\u0442"
