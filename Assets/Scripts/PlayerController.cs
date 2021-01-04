@@ -10,15 +10,15 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
 
     private bool passStart;
+    private bool finalMove = false;
+    
     public bool canMove = true;
     public bool isReading = false;
 
     public GameObject memoryPanel;
     public Color color;
     public string text;
-
-
-
+    
     public Transform mainCamera;
 
     public static PlayerController instance;
@@ -66,14 +66,20 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (passStart)
+        if (movement.y == 1f && !passStart)
+        {
+            rb2d.MovePosition(rb2d.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
+        
+        if (passStart && !finalMove)
         {
             if (canMove)
             {
                 rb2d.MovePosition(rb2d.position + new Vector2(0, 1f) * moveSpeed * Time.fixedDeltaTime);
             }
         }
-        else if (movement.y == 1f)
+        
+        if (movement.y == 1f && finalMove)
         {
             rb2d.MovePosition(rb2d.position + movement * moveSpeed * Time.fixedDeltaTime);
         }
