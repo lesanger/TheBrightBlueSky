@@ -7,11 +7,12 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     public float moveSpeed = 5f;
-    public Transform camera;
+    public Transform mainCamera;
     private Vector2 movement;
 
     private bool sameCoordinates;
-    
+    private bool canMove = true;
+
     void Start()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
@@ -23,21 +24,33 @@ public class PlayerController : MonoBehaviour
 
         if (rb2d.position.y >= 0)
         {
-            Debug.Log("Координаты совпали");
             sameCoordinates = true;
         }
 
         if (sameCoordinates)
         {
-            camera.position = new Vector3(camera.position.x, rb2d.position.y, camera.position.z);
+            mainCamera.position = new Vector3(mainCamera.position.x, rb2d.position.y, mainCamera.position.z);
         }
     }
 
     private void FixedUpdate()
     {
-        if (movement.y == 1f)
+        if (sameCoordinates)
+        {
+            if (canMove)
+            {
+                rb2d.MovePosition(rb2d.position + new Vector2(0, 1f) * moveSpeed * Time.fixedDeltaTime);
+            }
+        }
+        else if (movement.y == 1f)
         {
             rb2d.MovePosition(rb2d.position + movement * moveSpeed * Time.fixedDeltaTime);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Сработал триггер");
+        Destroy(other.gameObject);
     }
 }
