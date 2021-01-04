@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
             passStart = true;
         }
 
-        if (passStart)
+        if (passStart && !finalMove)
         {
             mainCamera.position = new Vector3(mainCamera.position.x, rb2d.position.y, mainCamera.position.z);
         }
@@ -91,6 +91,19 @@ public class PlayerController : MonoBehaviour
         {
             SetNewMemory(other.gameObject);
         }
+
+        if (other.gameObject.name == "EndTrigger")
+        {
+            EndTrigger();
+        }
+    }
+
+    private void EndTrigger()
+    {
+        Debug.Log("Финальный рывок");
+        
+        finalMove = true;
+        mainCamera.gameObject.GetComponent<CameraController>().finalMove = true;
     }
 
     private void SetNewMemory(GameObject memory)
