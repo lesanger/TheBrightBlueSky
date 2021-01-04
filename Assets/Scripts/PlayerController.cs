@@ -113,12 +113,16 @@ public class PlayerController : MonoBehaviour
 
         memoryPanel.SetActive(true);
         Destroy(memory);
+
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0);
         
         memoryPanel.GetComponent<Animation>().Play("Anim_MemoryStart");
     }
 
     private void CloseMemory()
     {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1);
+        
         memoryPanel.GetComponent<Animation>().Play("Anim_MemoryEnd");
     }
 }
