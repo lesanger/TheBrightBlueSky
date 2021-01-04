@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Transform mainCamera;
     private Vector2 movement;
 
-    private bool sameCoordinates;
+    private bool passStart;
     private bool canMove = true;
 
     void Start()
@@ -24,10 +24,10 @@ public class PlayerController : MonoBehaviour
 
         if (rb2d.position.y >= 0)
         {
-            sameCoordinates = true;
+            passStart = true;
         }
 
-        if (sameCoordinates)
+        if (passStart)
         {
             mainCamera.position = new Vector3(mainCamera.position.x, rb2d.position.y, mainCamera.position.z);
         }
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (sameCoordinates)
+        if (passStart)
         {
             if (canMove)
             {
@@ -52,5 +52,6 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Сработал триггер");
         Destroy(other.gameObject);
+        canMove = false;
     }
 }
