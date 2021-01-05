@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         }
 
         memoryPanel.SetActive(false);
+        endGamePanel.SetActive(false);
         
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -100,20 +101,28 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.name == "StartEndTrigger")
         {
-            EndTrigger();
+            StartEndTrigger();
         }
         
         if (other.gameObject.name == "EndTrigger")
         {
-            Debug.Log("Выстрел танка и черный экран... Несколько секунд он висит, потом анимация красит экран в синее небо и плавно включает звуки птиц и мира");
-            canMove = false;
-            tank.GetComponent<AudioSource>().loop = false;
-            tank.GetComponent<AudioSource>().PlayOneShot(tankShot);
-            endGamePanel.SetActive(true);
+            EndGame();
         }
     }
 
-    private void EndTrigger()
+    private void EndGame()
+    {
+        Debug.Log("Выстрел танка и черный экран... Несколько секунд он висит, потом анимация красит экран в синее небо и плавно включает звуки птиц и мира");
+        
+        canMove = false;
+        tank.GetComponent<AudioSource>().loop = false;
+        tank.GetComponent<AudioSource>().PlayOneShot(tankShot);
+        
+        endGamePanel.SetActive(true);
+        endGamePanel.GetComponent<Animation>().Play();
+    }
+
+    private void StartEndTrigger()
     {
         Debug.Log("Финальный рывок");
         
