@@ -129,6 +129,9 @@ public class PlayerController : MonoBehaviour
 
         memoryPanel.SetActive(true);
         Destroy(memory);
+        
+        canMove = false;
+        isReading = true;
 
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0);
         

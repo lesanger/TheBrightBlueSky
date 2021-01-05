@@ -13,10 +13,7 @@ public class MemoryPanel : MonoBehaviour
     public void SetNewMemory()
     {
         Debug.Log("Воспоминание началось");
-
-        PlayerController.instance.canMove = false;
-        PlayerController.instance.isReading = true;
-
+        
         gameObject.GetComponent<Image>().color = PlayerController.instance.color;
         text = PlayerController.instance.text;
         textGO.GetComponent<Text>().text = text;
@@ -28,7 +25,10 @@ public class MemoryPanel : MonoBehaviour
         
         PlayerController.instance.canMove = true;
         PlayerController.instance.isReading = false;
-        
+    }
+
+    public void Deactivate()
+    {
         gameObject.SetActive(false);
     }
 }
