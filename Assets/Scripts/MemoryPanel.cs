@@ -17,6 +17,8 @@ public class MemoryPanel : MonoBehaviour
         gameObject.GetComponent<Image>().color = PlayerController.instance.color;
         text = PlayerController.instance.text;
         textGO.GetComponent<Text>().text = text;
+        
+        PlayerController.instance.gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0);
     }
 
     public void CloseMemory()

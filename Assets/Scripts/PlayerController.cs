@@ -141,8 +141,6 @@ public class PlayerController : MonoBehaviour
         
         canMove = false;
         isReading = true;
-
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0);
         
         memoryPanel.GetComponent<Animation>().Play("Anim_MemoryStart");
     }
