@@ -13,7 +13,7 @@ public class MemoryPanel : MonoBehaviour
     public void SetNewMemory()
     {
         Debug.Log("Воспоминание началось");
-        
+
         gameObject.GetComponent<Image>().color = PlayerController.instance.color;
         text = PlayerController.instance.text;
         textGO.GetComponent<Text>().text = text;
