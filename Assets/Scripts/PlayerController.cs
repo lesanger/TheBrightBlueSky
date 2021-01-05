@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -162,7 +163,13 @@ public class PlayerController : MonoBehaviour
     public void RunBirdSong()
     {
         Debug.Log("Запуск песни птиц");
-        
-        //gameObject.GetComponent<AudioSource>().PlayOneShot(birdsSong);
+
+        gameObject.GetComponent<AudioSource>().loop = false;
+        gameObject.GetComponent<AudioSource>().PlayOneShot(birdsSong);
+    }
+
+    public void ReloadGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -4675,7 +4675,7 @@ MonoBehaviour:
   tankShot: {fileID: 8300000, guid: 8b2b53f2be09d344b8fbf8d012caaa43, type: 3}
   canMove: 1
   isReading: 0
-  birdsSong: {fileID: 0}
+  birdsSong: {fileID: 8300000, guid: fdcd1749ac9d69c498b33394f19a7545, type: 3}
   memoryPanel: {fileID: 431929959}
   endGamePanel: {fileID: 673503689}
   color: {r: 0, g: 0, b: 0, a: 0}
@@ -4827,7 +4827,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 1af8bd85a97d2004db639eba2ad1a8d5, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!1 &1800681028
