@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;
     public bool isReading = false;
 
+    public AudioClip birdsSong;
+
     public GameObject memoryPanel;
     public GameObject endGamePanel;
     public Color color;
@@ -150,5 +152,17 @@ public class PlayerController : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1);
         
         memoryPanel.GetComponent<Animation>().Play("Anim_MemoryEnd");
+    }
+
+    public void SetNewMelody()
+    {
+        gameObject.GetComponent<Animation>().Play();
+    }
+
+    public void RunBirdSong()
+    {
+        Debug.Log("Запуск песни птиц");
+        
+        //gameObject.GetComponent<AudioSource>().PlayOneShot(birdsSong);
     }
 }
