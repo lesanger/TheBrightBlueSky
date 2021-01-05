@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,11 +13,15 @@ public class PlayerController : MonoBehaviour
 
     private bool passStart;
     private bool finalMove = false;
+
+    public GameObject tank;
+    public AudioClip tankShot;
     
     public bool canMove = true;
     public bool isReading = false;
 
     public GameObject memoryPanel;
+    public GameObject endGamePanel;
     public Color color;
     public string text;
     
@@ -79,7 +85,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if (movement.y == 1f && finalMove)
+        if (movement.y == 1f && finalMove && canMove)
         {
             rb2d.MovePosition(rb2d.position + movement * moveSpeed * Time.fixedDeltaTime);
         }
@@ -92,9 +98,18 @@ public class PlayerController : MonoBehaviour
             SetNewMemory(other.gameObject);
         }
 
-        if (other.gameObject.name == "EndTrigger")
+        if (other.gameObject.name == "StartEndTrigger")
         {
             EndTrigger();
+        }
+        
+        if (other.gameObject.name == "EndTrigger")
+        {
+            Debug.Log("Выстрел танка и черный экран... Несколько секунд он висит, потом анимация красит экран в синее небо и плавно включает звуки птиц и мира");
+            canMove = false;
+            tank.GetComponent<AudioSource>().loop = false;
+            tank.GetComponent<AudioSource>().PlayOneShot(tankShot);
+            endGamePanel.SetActive(true);
         }
     }
 
@@ -104,6 +119,7 @@ public class PlayerController : MonoBehaviour
         
         finalMove = true;
         mainCamera.gameObject.GetComponent<CameraController>().finalMove = true;
+        tank.GetComponent<AudioSource>().Stop();
     }
 
     private void SetNewMemory(GameObject memory)
